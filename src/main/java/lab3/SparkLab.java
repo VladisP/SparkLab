@@ -19,7 +19,7 @@ public class SparkLab {
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
 
         JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
-        JavaRDD<String[]> 
+        JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter();
 
         //        JavaRDD<String> splitted = flightsFile.flatMap(
 //                s -> Arrays.stream(s.replaceAll("\"", "")
