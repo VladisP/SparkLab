@@ -30,7 +30,9 @@ public class SparkLab {
                 Float.parseFloat(columns[ARR_DELAY_TIME_COLUMN]);
     }
 
-    private static int is
+    private static int isFlightDelayed(String[] columns) {
+        return columns[ARR_DELAY_TIME_COLUMN].equals("") || 
+    }
 
     public static void main(String[] args) {
 
