@@ -12,6 +12,6 @@ public class SparkLab {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
-        
+        JavaRDD<>
     }
 }
