@@ -65,6 +65,6 @@ public class SparkLab {
         );
 
         JavaRDD<String> airportsFile = sc.textFile(AIRPORTS_DATA_FILE_NAME);
-        
+        airportsFile
     }
 }
