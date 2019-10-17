@@ -4,16 +4,14 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import scala.Array;
 import scala.Tuple2;
-
-import java.util.Arrays;
 
 public class SparkLab {
 
     private static final int ORIGIN_AIRPORT_ID_COLUMN = 11;
     private static final int DEST_AIRPORT_ID_COLUMN = 14;
     private static final int ARR_DELAY_TIME_COLUMN = 18;
+    private static final int CANCELLED_COLUMN = 19;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
 
@@ -31,7 +29,13 @@ public class SparkLab {
     }
 
     private static int isFlightDelayed(String[] columns) {
-        return columns[ARR_DELAY_TIME_COLUMN].equals("") || 
+        return (columns[ARR_DELAY_TIME_COLUMN].equals("") ||
+                Float.parseFloat(columns[ARR_DELAY_TIME_COLUMN]) == 0f) ?
+                0 : 1;
+    }
+
+    private static int isFlightCancelled(String[] columns) {
+        return ()
     }
 
     public static void main(String[] args) {
@@ -48,7 +52,7 @@ public class SparkLab {
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
-                        new FlightStatistics(getDelayTime(arr), )
+                        new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), )
                 )
         );
     }
