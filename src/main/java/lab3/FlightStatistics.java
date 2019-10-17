@@ -2,26 +2,26 @@ package lab3;
 
 import java.io.Serializable;
 
-public class FlightStatistics implements Serializable {
+class FlightStatistics implements Serializable {
 
     private float maxDelayTime;
     private long lateFlightsCount;
     private long cancelledFlightsCount;
     private long flightsCount;
 
-    public float getMaxDelayTime() {
+    private float getMaxDelayTime() {
         return maxDelayTime;
     }
 
-    public long getLateFlightsCount() {
+    private long getLateFlightsCount() {
         return lateFlightsCount;
     }
 
-    public long getCancelledFlightsCount() {
+    private long getCancelledFlightsCount() {
         return cancelledFlightsCount;
     }
 
-    public long getFlightsCount() {
+    private long getFlightsCount() {
         return flightsCount;
     }
 
