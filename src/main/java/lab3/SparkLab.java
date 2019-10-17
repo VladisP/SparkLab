@@ -4,7 +4,6 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
@@ -80,6 +79,11 @@ public class SparkLab {
 
         final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(airportDataMap);
 
-        JavaRDD<String> result = 
+        JavaRDD<String> result = statisticsPairs.map(
+                p -> airportsBroadcast.value().get(p._1._1) + " " +
+                        airportsBroadcast.value().get(p._1._2) + " " +
+                        p._2.toString()
+        );
+        
     }
 }
