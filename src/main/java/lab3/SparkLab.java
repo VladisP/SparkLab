@@ -4,6 +4,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import scala.Array;
 import scala.Tuple2;
 
 import java.util.Arrays;
@@ -17,8 +18,10 @@ public class SparkLab {
 
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
 
-        Jav
-//        JavaRDD<String> splitted = flightsFile.flatMap(
+        JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
+        JavaRDD<String[]> 
+
+        //        JavaRDD<String> splitted = flightsFile.flatMap(
 //                s -> Arrays.stream(s.replaceAll("\"", "")
 //                        .split(","))
 //                        .iterator()
