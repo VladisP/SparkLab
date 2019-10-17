@@ -15,6 +15,7 @@ public class SparkLab {
     private static final int CANCELLED_COLUMN = 19;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
+    private static final 
 
     private static Integer getOriginAirportId(String[] columns) {
         return Integer.parseInt(columns[ORIGIN_AIRPORT_ID_COLUMN]);
