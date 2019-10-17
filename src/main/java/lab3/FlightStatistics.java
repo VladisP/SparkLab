@@ -7,5 +7,7 @@ public class FlightStatistics {
     private long cancelledFlightsCount;
     private long flightsCount;
 
-    
+    FlightStatistics() {
+
+    }
 }
