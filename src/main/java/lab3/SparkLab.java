@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class SparkLab {
 
     private static final int DEST_AIRPORT_ID_COLUMN = 14;
-
+    private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
 
     public static void main(String[] args) {
 
@@ -22,13 +22,9 @@ public class SparkLab {
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
 
         JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
-        JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(arr -> arr[DEST_AIRPORT_ID_COLUMN] != );
-
-        //        JavaRDD<String> splitted = flightsFile.flatMap(
-//                s -> Arrays.stream(s.replaceAll("\"", "")
-//                        .split(","))
-//                        .iterator()
-//        );
-//        JavaPairRDD<Tuple2<Integer, Integer>, >
+        JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(
+                arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
+        );
+        JavaPairRDD<Tuple2<Integer, Integer>, >
     }
 }
