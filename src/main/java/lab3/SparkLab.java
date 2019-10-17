@@ -25,10 +25,12 @@ public class SparkLab {
         return Integer.parseInt(columns[DEST_AIRPORT_ID_COLUMN]);
     }
 
-    private static int getDelayTime(String[] columns) {
-        return columns[ARR_DELAY_TIME_COLUMN].equals("") ? 0 :
-                Integer.parseInt(columns[ARR_DELAY_TIME_COLUMN]);
+    private static float getDelayTime(String[] columns) {
+        return columns[ARR_DELAY_TIME_COLUMN].equals("") ? 0f :
+                Float.parseFloat(columns[ARR_DELAY_TIME_COLUMN]);
     }
+
+    private static int is
 
     public static void main(String[] args) {
 
