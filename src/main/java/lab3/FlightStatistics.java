@@ -15,4 +15,8 @@ public class FlightStatistics implements Serializable {
         this.cancelledFlightsCount = cancelledFlightsCount;
         this.flightsCount = flightsCount;
     }
+
+    static FlightStatistics union(FlightStatistics statistics1, FlightStatistics statistics2) {
+        return new FlightStatistics(Math.max(statistics1.maxDelayTime, statistics2.maxDelayTime));
+    }
 }

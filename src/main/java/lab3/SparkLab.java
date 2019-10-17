@@ -60,7 +60,7 @@ public class SparkLab {
         );
 
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> statisticsPairs = primaryStatisticsPairs.reduceByKey(
-                (flightStatistics, flightStatistics2) -> 
+                (flightStatistics, flightStatistics2) ->
         );
     }
 }
