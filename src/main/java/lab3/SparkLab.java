@@ -11,9 +11,14 @@ import java.util.Arrays;
 
 public class SparkLab {
 
+    private static final int ORIGIN_
     private static final int DEST_AIRPORT_ID_COLUMN = 14;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
+
+    private static Integer getOriginAirportId(String[] columns){
+
+    }
 
     public static void main(String[] args) {
 
@@ -27,7 +32,7 @@ public class SparkLab {
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
-                arr -> new JavaPairRDD<>()
+                arr -> new Tuple2<>(new Tuple2<>())
         );
     }
 }
