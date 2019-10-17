@@ -81,8 +81,8 @@ public class SparkLab {
         final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(airportDataMap);
 
         JavaRDD<String> result = statisticsPairs.map(
-                p -> airportsBroadcast.value().get(p._1._1) + " " +
-                        airportsBroadcast.value().get(p._1._2) + " " +
+                p -> airportsBroadcast.value().get(p._1._1) + "  |  " +
+                        airportsBroadcast.value().get(p._1._2) + "  |  " +
                         p._2.toString()
         );
         result.saveAsTextFile(OUTPUT_DATA_FILE_NAME);
