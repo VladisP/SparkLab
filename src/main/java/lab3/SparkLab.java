@@ -6,6 +6,6 @@ public class SparkLab {
 
     public static void main(String[] args) {
 
-        SparkConf 
+        SparkConf conf 
     }
 }
