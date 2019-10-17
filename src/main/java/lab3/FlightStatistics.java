@@ -1,6 +1,8 @@
 package lab3;
 
-public class FlightStatistics {
+import java.io.Serializable;
+
+public class FlightStatistics implements Serializable {
 
     private int maxDelayTime;
     private long lateFlightsCount;
