@@ -1,6 +1,7 @@
 package lab3;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
@@ -14,10 +15,11 @@ public class SparkLab {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
-        JavaRDD<String> splitted = flightsFile.flatMap(
-                s -> Arrays.stream(s.replaceAll("\"", "")
-                        .split(","))
-                        .iterator()
-        );
+//        JavaRDD<String> splitted = flightsFile.flatMap(
+//                s -> Arrays.stream(s.replaceAll("\"", "")
+//                        .split(","))
+//                        .iterator()
+//        );
+        JavaPairRDD<>
     }
 }
