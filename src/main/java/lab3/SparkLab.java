@@ -35,7 +35,7 @@ public class SparkLab {
     }
 
     private static int isFlightCancelled(String[] columns) {
-        return ()
+        return Float.parseFloat(columns[CANCELLED_COLUMN]) == 0f ? 0 : 1;
     }
 
     public static void main(String[] args) {
