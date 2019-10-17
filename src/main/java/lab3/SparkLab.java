@@ -13,16 +13,23 @@ public class SparkLab {
     private static final int DEST_AIRPORT_ID_COLUMN = 14;
     private static final int ARR_DELAY_TIME_COLUMN = 18;
     private static final int CANCELLED_COLUMN = 19;
+    private static final int AIRPORT_ID_COLUMN = 0;
+    private static final int AIRPORT_NAME_COLUMN = 1;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
+    private static final String ID_HEAD_VALUE = "Code";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
     private static final String AIRPORTS_DATA_FILE_NAME = "L_AIRPORT_ID.csv";
 
-    private static Integer getOriginAirportId(String[] columns) {
-        return Integer.parseInt(columns[ORIGIN_AIRPORT_ID_COLUMN]);
-    }
+//    private static Integer getOriginAirportId(String[] columns) {
+//        return Integer.parseInt(columns[ORIGIN_AIRPORT_ID_COLUMN]);
+//    }
+//
+//    private static Integer getDestAirportId(String[] columns) {
+//        return Integer.parseInt(columns[DEST_AIRPORT_ID_COLUMN]);
+//    }
 
-    private static Integer getDestAirportId(String[] columns) {
-        return Integer.parseInt(columns[DEST_AIRPORT_ID_COLUMN]);
+    private static Integer getId(String[] columns, int idColumnNumber) {
+
     }
 
     private static float getDelayTime(String[] columns) {
@@ -46,25 +53,27 @@ public class SparkLab {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flightsFile = sc.textFile(FLIGHTS_DATA_FILE_NAME);
-
         JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
-
         JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
-
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> primaryStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
                         new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), isFlightCancelled(arr), 1)
                 )
         );
-
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> statisticsPairs = primaryStatisticsPairs.reduceByKey(
                 FlightStatistics::union
         );
 
         JavaRDD<String> airportsFile = sc.textFile(AIRPORTS_DATA_FILE_NAME);
-        airportsFile
+        JavaRDD<String[]> airportsColumns = airportsFile.map(s -> s.replaceAll("\"", "").split(","));
+        JavaRDD<String[]> usefulAirportsColumns = airportsColumns.filter(
+                arr -> !arr[AIRPORT_ID_COLUMN].equals(ID_HEAD_VALUE)
+        );
+        JavaPairRDD<Integer, String> airportDataPairs = usefulAirportsColumns.mapToPair(
+                arr -> new Tuple2<>()
+        );
     }
 }
