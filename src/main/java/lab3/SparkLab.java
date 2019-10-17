@@ -16,6 +16,8 @@ public class SparkLab {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flightsFile = sc.textFile("664600583_T_ONTIME_sample.csv");
+
+        Jav
 //        JavaRDD<String> splitted = flightsFile.flatMap(
 //                s -> Arrays.stream(s.replaceAll("\"", "")
 //                        .split(","))
