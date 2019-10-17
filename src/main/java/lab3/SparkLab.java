@@ -6,6 +6,6 @@ public class SparkLab {
 
     public static void main(String[] args) {
 
-        SparkConf conf = new SparkConf().setAppName()
+        SparkConf conf = new SparkConf().setAppName("lab3");
     }
 }
