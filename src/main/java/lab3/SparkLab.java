@@ -5,6 +5,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.Map;
@@ -76,5 +77,7 @@ public class SparkLab {
                 arr -> new Tuple2<>(getId(arr, AIRPORT_ID_COLUMN), getAirportName(arr))
         );
         Map<Integer, String> airportDataMap = airportDataPairs.collectAsMap();
+
+        final Broadcast<>
     }
 }
