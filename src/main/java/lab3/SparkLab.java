@@ -7,6 +7,8 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function2;
 import scala.Tuple2;
 
+import java.util.Map;
+
 public class SparkLab {
 
     private static final int ORIGIN_AIRPORT_ID_COLUMN = 11;
@@ -73,6 +75,6 @@ public class SparkLab {
         JavaPairRDD<Integer, String> airportDataPairs = usefulAirportsColumns.mapToPair(
                 arr -> new Tuple2<>(getId(arr, AIRPORT_ID_COLUMN), getAirportName(arr))
         );
-        
+        Map<Integer, String> airportDataMap = airportDataPairs.collectAsMap();
     }
 }
