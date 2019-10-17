@@ -57,5 +57,7 @@ public class SparkLab {
                         new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), isFlightCancelled(arr), 1)
                 )
         );
+
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> 
     }
 }
