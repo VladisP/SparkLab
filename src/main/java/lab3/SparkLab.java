@@ -46,9 +46,11 @@ public class SparkLab {
         JavaRDD<String> flightsFile = sc.textFile(FLIGHTS_DATA_FILE_NAME);
 
         JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
+
         JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
+
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
