@@ -78,6 +78,6 @@ public class SparkLab {
         );
         Map<Integer, String> airportDataMap = airportDataPairs.collectAsMap();
 
-        final Broadcast<Map<Integer, String>>
+        final Broadcast<Map<Integer, String>> 
     }
 }
