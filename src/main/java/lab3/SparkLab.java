@@ -13,6 +13,7 @@ public class SparkLab {
 
     private static final int ORIGIN_AIRPORT_ID_COLUMN = 11;
     private static final int DEST_AIRPORT_ID_COLUMN = 14;
+    private static final int ARR_DELAY_TIME_COLUMN = 18;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
 
@@ -22,6 +23,10 @@ public class SparkLab {
 
     private static Integer getDestAirportId(String[] columns) {
         return Integer.parseInt(columns[DEST_AIRPORT_ID_COLUMN]);
+    }
+
+    private static int getDelayTime(String[] columns) {
+        return columns[ARR_DELAY_TIME_COLUMN];
     }
 
     public static void main(String[] args) {
@@ -38,8 +43,8 @@ public class SparkLab {
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
-                        
-                        )
+                        new FlightStatistics()
+                )
         );
     }
 }
