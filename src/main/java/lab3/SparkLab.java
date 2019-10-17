@@ -52,7 +52,7 @@ public class SparkLab {
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
-                        new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), )
+                        new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), isFlightCancelled(arr), 1)
                 )
         );
     }
