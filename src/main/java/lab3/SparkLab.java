@@ -4,6 +4,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function2;
 import scala.Tuple2;
 
 public class SparkLab {
@@ -51,13 +52,15 @@ public class SparkLab {
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
 
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> primaryStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
                         new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), isFlightCancelled(arr), 1)
                 )
         );
 
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> 
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> statisticsPairs = primaryStatisticsPairs.reduceByKey(
+                (flightStatistics, flightStatistics2) -> 
+        );
     }
 }
