@@ -26,6 +26,8 @@ public class SparkLab {
         JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics>
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
+                arr -> new JavaPairRDD<>()
+        );
     }
 }
