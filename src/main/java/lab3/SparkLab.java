@@ -80,6 +80,6 @@ public class SparkLab {
 
         final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(airportDataMap);
 
-        JavaPairRDD
+        JavaRDD<String> result = 
     }
 }
