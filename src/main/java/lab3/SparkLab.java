@@ -21,6 +21,7 @@ public class SparkLab {
     private static final String ID_HEAD_VALUE = "Code";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
     private static final String AIRPORTS_DATA_FILE_NAME = "L_AIRPORT_ID.csv";
+    private static final String OUTPUT_DATA_FILE_NAME = "outputLab3";
 
     private static Integer getId(String[] columns, int idColumnNumber) {
         return Integer.parseInt(columns[idColumnNumber]);
@@ -84,6 +85,6 @@ public class SparkLab {
                         airportsBroadcast.value().get(p._1._2) + " " +
                         p._2.toString()
         );
-        
+        result.saveAsTextFile(OUTPUT_DATA_FILE_NAME);
     }
 }
