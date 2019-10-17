@@ -3,7 +3,9 @@ package lab3;
 public class FlightStatistics {
 
     private int maxDelayTime;
-    private long 
-    private long cancelledCount;
+    private long lateFlightsCount;
+    private long cancelledFlightsCount;
     private long flightsCount;
+
+    
 }
