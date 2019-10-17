@@ -26,7 +26,8 @@ public class SparkLab {
     }
 
     private static int getDelayTime(String[] columns) {
-        return columns[ARR_DELAY_TIME_COLUMN];
+        return columns[ARR_DELAY_TIME_COLUMN].equals("") ? 0 :
+                Integer.parseInt(columns[ARR_DELAY_TIME_COLUMN]);
     }
 
     public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class SparkLab {
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> flightsStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
                         new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
-                        new FlightStatistics()
+                        new FlightStatistics(getDelayTime(arr), )
                 )
         );
     }
