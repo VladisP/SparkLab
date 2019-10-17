@@ -20,16 +20,8 @@ public class SparkLab {
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
     private static final String AIRPORTS_DATA_FILE_NAME = "L_AIRPORT_ID.csv";
 
-//    private static Integer getOriginAirportId(String[] columns) {
-//        return Integer.parseInt(columns[ORIGIN_AIRPORT_ID_COLUMN]);
-//    }
-//
-//    private static Integer getDestAirportId(String[] columns) {
-//        return Integer.parseInt(columns[DEST_AIRPORT_ID_COLUMN]);
-//    }
-
     private static Integer getId(String[] columns, int idColumnNumber) {
-
+        return Integer.parseInt(columns[idColumnNumber]);
     }
 
     private static float getDelayTime(String[] columns) {
@@ -47,6 +39,12 @@ public class SparkLab {
         return Float.parseFloat(columns[CANCELLED_COLUMN]) == 0f ? 0 : 1;
     }
 
+    private static String getAirportName(String[] columns) {
+        return columns.length == 3 ?
+                columns[AIRPORT_NAME_COLUMN] + columns[AIRPORT_NAME_COLUMN + 1] :
+                columns[AIRPORT_NAME_COLUMN];
+    }
+
     public static void main(String[] args) {
 
         SparkConf conf = new SparkConf().setAppName("lab3");
@@ -59,7 +57,7 @@ public class SparkLab {
         );
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> primaryStatisticsPairs = usefulFlightsColumns.mapToPair(
                 arr -> new Tuple2<>(
-                        new Tuple2<>(getOriginAirportId(arr), getDestAirportId(arr)),
+                        new Tuple2<>(getId(arr, ORIGIN_AIRPORT_ID_COLUMN), getId(arr, DEST_AIRPORT_ID_COLUMN)),
                         new FlightStatistics(getDelayTime(arr), isFlightDelayed(arr), isFlightCancelled(arr), 1)
                 )
         );
@@ -73,7 +71,8 @@ public class SparkLab {
                 arr -> !arr[AIRPORT_ID_COLUMN].equals(ID_HEAD_VALUE)
         );
         JavaPairRDD<Integer, String> airportDataPairs = usefulAirportsColumns.mapToPair(
-                arr -> new Tuple2<>()
+                arr -> new Tuple2<>(getId(arr, AIRPORT_ID_COLUMN), getAirportName(arr))
         );
+        
     }
 }
