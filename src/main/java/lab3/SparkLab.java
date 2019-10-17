@@ -15,7 +15,7 @@ public class SparkLab {
     private static final int CANCELLED_COLUMN = 19;
     private static final String DEST_ID_HEAD_VALUE = "DEST_AIRPORT_ID";
     private static final String FLIGHTS_DATA_FILE_NAME = "664600583_T_ONTIME_sample.csv";
-    private static final String AIRPORTS_DATA_FILE_NAME = "";
+    private static final String AIRPORTS_DATA_FILE_NAME = "L_AIRPORT_ID.csv";
 
     private static Integer getOriginAirportId(String[] columns) {
         return Integer.parseInt(columns[ORIGIN_AIRPORT_ID_COLUMN]);
@@ -63,5 +63,8 @@ public class SparkLab {
         JavaPairRDD<Tuple2<Integer, Integer>, FlightStatistics> statisticsPairs = primaryStatisticsPairs.reduceByKey(
                 FlightStatistics::union
         );
+
+        JavaRDD<String> airportsFile = sc.textFile(AIRPORTS_DATA_FILE_NAME);
+        
     }
 }
