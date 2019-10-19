@@ -54,7 +54,7 @@ public class SparkLab {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flightsFile = sc.textFile(FLIGHTS_DATA_FILE_NAME);
-        JavaRDD<String[]> flightsColumns = flightsFile.map(s -> s.replaceAll("\"", "").split(","));
+        JavaRDD<String[]> flightsColumns = flightsFile.map(CsvParser::getColumns);
         JavaRDD<String[]> usefulFlightsColumns = flightsColumns.filter(
                 arr -> !arr[DEST_AIRPORT_ID_COLUMN].equals(DEST_ID_HEAD_VALUE)
         );
@@ -69,7 +69,7 @@ public class SparkLab {
         );
 
         JavaRDD<String> airportsFile = sc.textFile(AIRPORTS_DATA_FILE_NAME);
-        JavaRDD<String[]> airportsColumns = airportsFile.map(s -> s.replaceAll("\"", "").split(","));
+        JavaRDD<String[]> airportsColumns = airportsFile.map(CsvParser::getColumns);
         JavaRDD<String[]> usefulAirportsColumns = airportsColumns.filter(
                 arr -> !arr[AIRPORT_ID_COLUMN].equals(ID_HEAD_VALUE)
         );

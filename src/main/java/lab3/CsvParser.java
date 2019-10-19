@@ -1,11 +1,9 @@
 package lab3;
 
-import org.apache.hadoop.io.Text;
+class CsvParser {
 
-public class CsvParser {
+    static String[] getColumns(String row) {
 
-    public static String[] getColumns(Text row) {
-
-        return row.toString().replaceAll("\"", "").split(",");
+        return row.replaceAll("\"", "").split(",");
     }
 }
